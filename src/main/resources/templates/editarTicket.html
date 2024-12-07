@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos/cabecero::cabecero-seccion(titulo='Editar')}">
+</head>
+<body>
+<!--Div es del menu de navegacion-->
+
+<div th:replace="~{fragmentos/navegacion::navegacion-seccion}"/>
+
+<div class="container">
+    <div class="container text-center" style="margin:30px">
+        <h3>Editar Ticket</h3>
+    </div>
+    <div class="container">
+
+        <form action="/editarTicket" th:object="${ticket}" method="post">
+            <input type="hidden" th:field="*{idTicket}"/>
+            <div class="mb-3">
+                <label for="estado" class="form-label">estado</label>
+                <input type="text" class="form-control"
+                       id="estado" name="estado"required="true" th:field="*{estado}" >
+
+            </div>
+
+            <div class="mb-3">
+                <label for="comentario" class="form-label">comentario</label>
+                <input type="text" class="form-control"
+                       id="comentario" name="comentario"required="true" th:field="*{comentario}" >
+
+            </div>
+
+            <div class="mb-3">
+                <label for="solicitante" class="form-label">solicitante</label>
+                <input type="text" class="form-control"
+                       id="solicitante" name="solicitante"required="true" th:field="*{solicitante}" >
+
+            </div>
+
+            <div class="mb-3">
+                <label for="asignado" class="form-label">asignado</label>
+                <input type="text" class="form-control"
+                       id="asignado" name="asignado"required="true" th:field="*{asignado}" >
+
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Editar</button>
+                <a href="/" class="btn btn-danger btn-sm">Regresar</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragmentos/pie-pagina::pie-pagina-seccion}"/>
+</body>
+</html>
