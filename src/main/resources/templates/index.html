@@ -3,18 +3,57 @@
 <head th:replace="~{fragmentos/cabecero::cabecero-seccion(titulo='Inicio')}">
 </head>
 <body>
-<!--Div es del menu de navegacion-->
-
+<!-- Menú de navegación -->
 <div th:replace="~{fragmentos/navegacion::navegacion-seccion}"/>
 
-<!--Div para desplegar la tabla-->
+<!-- Contenedor principal -->
+<div class="container mt-5">
 
-<div class="container">
-    <div class="container text-center" style="margin:30px">
-    <h3>Sistema de Contactos</h3>
+    <!-- Tabla de Tickets -->
+    <div class="text-center mb-4">
+        <h3>Tickets</h3>
     </div>
-<div class="container">
-    <table class="table">
+    <table class="table w-100">
+        <thead class="table-dark text-center">
+        <tr>
+            <th scope="col">IdTicket</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Comentario</th>
+            <th scope="col">Solicitante</th>
+            <th scope="col">Asignado</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ticket: ${tickets}">
+            <th th:text="${ticket.idTicket}" scope="row"></th>
+            <td>
+                    <span th:text="${ticket.estado}"
+                          th:class="${ticket.estado == 'cerrado' ? 'badge bg-danger text-white' :
+                                      (ticket.estado == 'abierto' ? 'badge bg-success text-white' :
+                                      (ticket.estado == 'pendiente' ? 'badge bg-warning text-dark' : 'badge'))}">
+                    </span>
+            </td>
+            <td th:text="${ticket.comentario}"></td>
+            <td th:text="${ticket.solicitante}"></td>
+            <td th:text="${ticket.asignado}"></td>
+            <td class="text-center">
+                <div>
+                    <a th:href="@{/editarTicket/{id}(id=${ticket.idTicket})}"
+                       class="btn btn-warning btn-sm me-3">Editar</a>
+                    <a th:href="@{/eliminarTicket/{id}(id=${ticket.idTicket})}"
+                       class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Tabla de Contactos -->
+    <div class="text-center mb-4">
+        <h3>Sistema de Contactos</h3>
+    </div>
+    <table class="table w-100">
         <thead class="table-dark text-center">
         <tr>
             <th scope="col">Id</th>
@@ -28,60 +67,24 @@
         <tbody>
         <tr th:each="contacto: ${contactos}">
             <th th:text="${contacto.idContacto}" scope="row"></th>
-            <td th:text="${contacto.nombre}"</td>
-            <td th:text="${contacto.celular}"</td>
-            <td th:text="${contacto.email}"</td>
-            <td th:text="${contacto.estado}"</td>
-
+            <td th:text="${contacto.nombre}"></td>
+            <td th:text="${contacto.celular}"></td>
+            <td th:text="${contacto.email}"></td>
+            <td th:text="${contacto.estado}"></td>
             <td class="text-center">
-                <div class="container">
-                <a th:href="@{/editar/{id}(id=${contacto.idContacto})}"
-                   class="btn btn-warning btn-sm me-3">Editar</a>
-                <a th:href="@{/eliminar/{id}(id=${contacto.idContacto})}"
-                       class="btn btn-danger btn-sm me">Eliminar</a>
-                    </div>
+                <div>
+                    <a th:href="@{/editar/{id}(id=${contacto.idContacto})}"
+                       class="btn btn-warning btn-sm me-3">Editar</a>
+                    <a th:href="@{/eliminar/{id}(id=${contacto.idContacto})}"
+                       class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
             </td>
         </tr>
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
 
-    <div class="container">
-        <h3>Tickets</h3>
-        <table class="table">
-            <thead class="table-dark text-center">
-            <tr>
-                <th scope="col">IdTicket</th>
-                <th scope="col">Estado</th>
-                <th scope="col">comentario</th>
-                <th scope="col">solicitante</th>
-                <th scope="col">asignado</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="ticket: ${tickets}">
-                <th th:text="${ticket.idTicket}" scope="row"></th>
-                <td th:text="${ticket.estado}"></td>
-                <td th:text="${ticket.comentario}"></td>
-                <td th:text="${ticket.solicitante}"></td>
-                <td th:text="${ticket.asignado}"></td>
-
-                <td class="text-center">
-                    <div class="container">
-                        <a th:href="@{/editarTicket/{id}(id=${ticket.idTicket})}"
-                           class="btn btn-warning btn-sm me-3">Editar</a>
-                        <a th:href="@{/eliminarTicket/{id}(id=${ticket.idTicket})}"
-                           class="btn btn-danger btn-sm me">Eliminar</a>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+</div> <!-- Fin del contenedor principal -->
 
 <div th:replace="~{fragmentos/pie-pagina::pie-pagina-seccion}"/>
-
 </body>
 </html>

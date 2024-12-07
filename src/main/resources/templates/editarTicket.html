@@ -17,9 +17,12 @@
             <input type="hidden" th:field="*{idTicket}"/>
             <div class="mb-3">
                 <label for="estado" class="form-label">estado</label>
-                <input type="text" class="form-control"
-                       id="estado" name="estado"required="true" th:field="*{estado}" >
-
+                <select class="form-select" id="estado" th:field="*{estado}" required>
+                    <option value="" disabled th:if="${ticket.estado == null}">Selecciona un estado</option>
+                    <option value="abierto" th:selected="${ticket.estado == 'abierto'}">Abierto</option>
+                    <option value="cerrado" th:selected="${ticket.estado == 'cerrado'}">Cerrado</option>
+                    <option value="pendiente" th:selected="${ticket.estado == 'pendiente'}">Pendiente</option>
+                </select>
             </div>
 
             <div class="mb-3">
