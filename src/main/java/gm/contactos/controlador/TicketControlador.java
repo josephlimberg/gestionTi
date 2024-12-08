@@ -20,16 +20,6 @@ public class TicketControlador {
     @Autowired
     TicketServicio ticketServicio;
 
-    /*@GetMapping("/agregarTicket")
-    public String mostrartabla(ModelMap modelo){
-        List<Ticket> tickets = ticketServicio.listarTicket();
-        tickets.forEach((ticket) -> logger.info(ticket.toString()));
-        modelo.put("tickets", tickets);
-        return "agregarTicket"; //index.html
-    }
-
-     */
-
     @GetMapping("/agregarTicket")
     public String mostrarAgregarTicket(){
         return "agregarTicket"; //agregarTicket.html
