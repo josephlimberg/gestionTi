@@ -29,11 +29,13 @@
         <tr th:each="ticket: ${tickets}">
             <th th:text="${ticket.idTicket}" scope="row"></th>
             <td>
-                    <span th:text="${ticket.estado}"
-                          th:class="${ticket.estado == 'cerrado' ? 'badge bg-danger text-white' :
-                                      (ticket.estado == 'abierto' ? 'badge bg-success text-white' :
-                                      (ticket.estado == 'pendiente' ? 'badge bg-warning text-dark' : 'badge'))}">
-                    </span>
+                <!-- Estado con estilos basados en el valor -->
+                <span th:text="${ticket.estado}"
+                      th:class="${ticket.estado == 'cerrado' ? 'badge bg-danger text-white' :
+                              (ticket.estado == 'abierto' ? 'badge bg-success text-white' :
+                              (ticket.estado == 'pendiente' ? 'badge bg-warning text-dark' :
+                              (ticket.estado == 'terminado' ? 'badge bg-primary text-white' : 'badge')))}">
+            </span>
             </td>
             <td th:text="${ticket.comentario}"></td>
             <td th:text="${ticket.solicitante}"></td>
@@ -51,7 +53,6 @@
     </table>
 
 
-
     <!-- Tabla de Usuarios -->
     <div sec:authorize="hasRole('ROLE_ADMIN')">
     <div class="text-center mb-4">
@@ -63,8 +64,8 @@
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>
             <th scope="col">Celular</th>
-            <th scope="col">Email</th>
-            <th scope="col">Estado</th>
+            <th scope="col">User</th>
+            <th scope="col">Password</th>
             <th scope="col"></th>
         </tr>
         </thead>

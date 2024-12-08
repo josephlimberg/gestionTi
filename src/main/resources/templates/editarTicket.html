@@ -17,12 +17,13 @@
         <form action="/editarTicket" th:object="${ticket}" method="post">
             <input type="hidden" th:field="*{idTicket}"/>
             <div sec:authorize="hasRole('ROLE_ADMIN')" class="mb-3">
-                <label for="estado" class="form-label">estado</label>
+                <label for="estado" class="form-label">Estado</label>
                 <select class="form-select" id="estado" th:field="*{estado}" required>
                     <option value="" disabled th:if="${ticket.estado == null}">Selecciona un estado</option>
                     <option value="abierto" th:selected="${ticket.estado == 'abierto'}">Abierto</option>
                     <option value="cerrado" th:selected="${ticket.estado == 'cerrado'}">Cerrado</option>
                     <option value="pendiente" th:selected="${ticket.estado == 'pendiente'}">Pendiente</option>
+                    <option value="terminado" th:selected="${ticket.estado == 'terminado'}">Terminado</option>
                 </select>
             </div>
 
