@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragmentos/cabecero::cabecero-seccion(titulo='Editar')}">
 </head>
 <body>
@@ -15,7 +16,7 @@
 
         <form action="/editarTicket" th:object="${ticket}" method="post">
             <input type="hidden" th:field="*{idTicket}"/>
-            <div class="mb-3">
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="mb-3">
                 <label for="estado" class="form-label">estado</label>
                 <select class="form-select" id="estado" th:field="*{estado}" required>
                     <option value="" disabled th:if="${ticket.estado == null}">Selecciona un estado</option>
@@ -39,7 +40,7 @@
 
             </div>
 
-            <div class="mb-3">
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="mb-3">
                 <label for="asignado" class="form-label">asignado</label>
                 <input type="text" class="form-control"
                        id="asignado" name="asignado"required="true" th:field="*{asignado}" >

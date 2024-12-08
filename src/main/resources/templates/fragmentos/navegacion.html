@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="navegacion-seccion" th:remove="tag">
 
@@ -17,13 +18,47 @@
               <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/agregar">Regitrar Contacto</a>
+              <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/agregar">Regitrar Contacto</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/agregarTicket">Regitrar Ticket</a>
+              <a  sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="/agregarTicket">Regitrar Ticket</a>
             </li>
-
           </ul>
+
+          <!-- Botón de Logout -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-logout-danger">Logout</button>
+              </form>
+            </li>
+          </ul>
+
+          <!-- Estilos personalizados -->
+          <style>
+            .btn-logout-danger {
+                background-color: #dc3545; /* Fondo rojo */
+                color: white; /* Texto blanco */
+                font-size: 16px;
+                padding: 10px 20px; /* Espaciado dentro del botón */
+                border-radius: 5px; /* Bordes redondeados */
+                border: none;
+                font-weight: bold;
+                transition: background-color 0.3s ease, transform 0.3s ease;
+            }
+
+            .btn-logout-danger:hover {
+                background-color: #c82333; /* Color más oscuro al pasar el mouse */
+                transform: scale(1.05); /* Efecto de ampliación al pasar el mouse */
+            }
+
+            /* Asegurar que el botón esté alineado a la derecha */
+            .navbar-nav.ml-auto {
+                margin-left: auto;
+            }
+          </style>
+
+
         </div>
       </div>
     </nav>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragmentos/cabecero::cabecero-seccion(titulo='Inicio')}">
 </head>
 <body>
@@ -41,7 +42,7 @@
                 <div>
                     <a th:href="@{/editarTicket/{id}(id=${ticket.idTicket})}"
                        class="btn btn-warning btn-sm me-3">Editar</a>
-                    <a th:href="@{/eliminarTicket/{id}(id=${ticket.idTicket})}"
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarTicket/{id}(id=${ticket.idTicket})}"
                        class="btn btn-danger btn-sm">Eliminar</a>
                 </div>
             </td>
@@ -52,6 +53,7 @@
 
 
     <!-- Tabla de Usuarios -->
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
     <div class="text-center mb-4">
         <h3>Sistema de Usuarios</h3>
     </div>
@@ -77,14 +79,14 @@
                 <div>
                     <a th:href="@{/editar/{id}(id=${contacto.idContacto})}"
                        class="btn btn-warning btn-sm me-3">Editar</a>
-                    <a th:href="@{/eliminar/{id}(id=${contacto.idContacto})}"
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar/{id}(id=${contacto.idContacto})}"
                        class="btn btn-danger btn-sm">Eliminar</a>
                 </div>
             </td>
         </tr>
         </tbody>
     </table>
-
+    </div>
 </div> <!-- Fin del contenedor principal -->
 
 <div th:replace="~{fragmentos/pie-pagina::pie-pagina-seccion}"/>
